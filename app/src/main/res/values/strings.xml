@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">Hulaba</string>
     <string name="title_activity_word">WordActivity</string>
+    <string name="enterWord">Enter Word</string>
 </resources>
