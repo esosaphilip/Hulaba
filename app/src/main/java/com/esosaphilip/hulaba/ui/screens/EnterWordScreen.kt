@@ -1,6 +1,5 @@
 package com.esosaphilip.hulaba.ui.screens
 
-
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -28,15 +27,15 @@ object WordEntryDestination : NavigationDestination {
     override val route = Screen.EnterWordScreen.route
     override var titleRes = R.string.enterWord
 }
+
 @Composable
 fun EnterWordScreen(
     navigateBack: () -> Unit,
     onNavigateUp: () -> Unit,
     modifier: Modifier = Modifier,
     canNavigateBack: Boolean = true,
-   viewModel: WordEntryViewModel = koinViewModel()
-){
-
+    viewModel: WordEntryViewModel = koinViewModel(),
+) {
     val coroutineScope = rememberCoroutineScope()
 
     Scaffold(
@@ -44,9 +43,9 @@ fun EnterWordScreen(
             TopAppBar(
                 title = stringResource(WordEntryDestination.titleRes),
                 canNavigateBack = canNavigateBack,
-                navigateUp = onNavigateUp
+                navigateUp = onNavigateUp,
             )
-        }
+        },
     ) { innerPadding ->
         WordEntryBody(
             wordUiState = viewModel.wordUiState,
@@ -57,31 +56,26 @@ fun EnterWordScreen(
                     navigateBack()
                 }
             },
-            modifier = modifier.padding(innerPadding)
+            modifier = modifier.padding(innerPadding),
         )
     }
-
 }
 
 @Composable
 fun WordEntryBody(
     wordUiState: WordUiState,
     onItemValueChange: (WordUiState) -> Unit,
-   onSaveClick: () -> Unit,
-    modifier: Modifier = Modifier
-){
+    onSaveClick: () -> Unit,
+    modifier: Modifier = Modifier,
+) {
     Column(
         modifier = modifier
             .fillMaxWidth()
             .padding(16.dp),
-        verticalArrangement = Arrangement.spacedBy(32.dp)
+        verticalArrangement = Arrangement.spacedBy(32.dp),
     ) {
         WordEntryInputForm(wordUiState = wordUiState, onValueChange = onItemValueChange)
-
     }
-
-
-
 }
 
 @Composable
@@ -89,55 +83,51 @@ fun WordEntryInputForm(
     wordUiState: WordUiState,
     modifier: Modifier = Modifier,
     onValueChange: (WordUiState) -> Unit = {},
-    enabled: Boolean = true
-){
+    enabled: Boolean = true,
+) {
     Column(modifier = modifier.fillMaxWidth(), verticalArrangement = Arrangement.spacedBy(16.dp)) {
         OutlinedTextField(
             value = wordUiState.word,
             onValueChange = { onValueChange(wordUiState.copy(word = it)) },
-            label = {  },
+            label = { },
             modifier = Modifier.fillMaxWidth(),
             enabled = enabled,
-            singleLine = true
+            singleLine = true,
         )
         OutlinedTextField(
             value = wordUiState.wordDefinition,
             onValueChange = { onValueChange(wordUiState.copy(wordDefinition = it)) },
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text),
-            label = {  },
+            label = { },
             leadingIcon = { Text(Currency.getInstance(Locale.getDefault()).symbol) },
             modifier = Modifier.fillMaxWidth(),
             enabled = enabled,
-            singleLine = true
+            singleLine = true,
         )
         OutlinedTextField(
             value = wordUiState.example,
             onValueChange = { onValueChange(wordUiState.copy(example = it)) },
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text),
-            label = {  },
+            label = { },
             modifier = Modifier.fillMaxWidth(),
             enabled = enabled,
-            singleLine = true
+            singleLine = true,
         )
     }
 }
 
-
-
-
-
 @Composable
 @Preview(showBackground = true)
-fun EnterPreview(){
+fun EnterPreview() {
     HulabaTheme {
         WordEntryBody(
             wordUiState = WordUiState(
                 word = "Application",
                 wordDefinition = "Application is open source",
-                example = "i want this App to Work"
+                example = "i want this App to Work",
             ),
             onItemValueChange = {},
-           onSaveClick = {}
+            onSaveClick = {},
         )
     }
 }

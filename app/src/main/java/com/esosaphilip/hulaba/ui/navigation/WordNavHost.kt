@@ -26,7 +26,13 @@ fun WordNavHost(
             route = Screen.HomeScreen.route
         )
         {
-           HomeScreen()
+           HomeScreen(
+               navigateToItemEntry = { navController.navigate(ItemEntryDestination.route) },
+               navigateToItemUpdate = {
+                   navController.navigate("${ItemDetailsDestination.route}/${it}")
+               },
+
+           )
         }
         composable(
             route = Screen.WordScreen.route

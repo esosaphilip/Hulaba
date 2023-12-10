@@ -10,5 +10,4 @@ interface NavigationDestination {
      * String resource id to that contains title to be displayed for the screen.
      */
     val titleRes: Int
-
 }

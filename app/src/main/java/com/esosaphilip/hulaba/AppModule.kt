@@ -12,18 +12,18 @@ import org.koin.dsl.module
 
 val appModule = module {
 
-single {
-   provideDatabase(androidApplication() as WordApplication)
-}
-single {
-provideDao(get())
-}
-  single {
-      WordRepo(get())
-  }
-viewModel {
-    HomeViewModel(get())
-}
+    single {
+        provideDatabase(androidApplication() as WordApplication)
+    }
+    single {
+        provideDao(get())
+    }
+    single {
+        WordRepo(get())
+    }
+    viewModel {
+        HomeViewModel(get())
+    }
 
     viewModel {
         WordEntryViewModel(get())
@@ -33,7 +33,8 @@ viewModel {
 private fun provideDatabase(application: WordApplication): WordsDatabase {
     return Room.databaseBuilder(
         application,
-        WordsDatabase::class.java, "database-name"
+        WordsDatabase::class.java,
+        "database-name",
     ).fallbackToDestructiveMigration().build()
 }
 

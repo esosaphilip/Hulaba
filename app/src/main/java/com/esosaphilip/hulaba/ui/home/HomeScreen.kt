@@ -30,6 +30,7 @@ import com.esosaphilip.hulaba.WordTopAppBar
 import com.esosaphilip.hulaba.data.Word
 import com.esosaphilip.hulaba.ui.navigation.NavigationDestination
 import com.esosaphilip.hulaba.ui.screens.Screen
+import org.koin.androidx.compose.koinViewModel
 
 object HomeDestination : NavigationDestination {
     override val route = "home"
@@ -41,7 +42,7 @@ fun HomeScreen(
     navigateToItemEntry: () -> Unit,
     navigateToItemUpdate: (Int) -> Unit,
     modifier: Modifier = Modifier,
-    viewModel: HomeViewModel
+    viewModel: HomeViewModel = koinViewModel()
 ) {
     val homeUiState by viewModel.homeUiState.collectAsState()
     Scaffold(
